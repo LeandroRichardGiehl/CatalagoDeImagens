@@ -1,34 +1,79 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Imagens</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Jogadores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="container">
-   <center><h1>Catalago de imagens de jogadores</h1></center> 
+    <h1 class="text-center text-white py-3 mb-0 bg-primary">
+        <i class="fas fa-futbol mr-2"></i>Catálogo de Jogadores
+    </h1>
 
-   <div class="search-container">
-    <input type="text" id="search-input" placeholder="Digite o nome da imagem">
-    <button id="search-btn">Pesquisar</button>
-  </div>
-    <table class="imagem-table">
-      <tbody class="imagem-lista">
-      </tbody>
-    </table>
-    <div class="modal" id="imagem-modal">
-        <span class="close">&times;</span>
-        <div class="details">
-          <h2 id="modal-titulo"></h2>
-          <p id="modal-descricao"></p>
-          <p id="modal-autor"></p>
-          <p id="modal-data"></p>
+    <div class="container">
+        <div class="catalog">
+            <button id="addButton" class="btn btn-primary mb-4">Adicionar</button>
+            <div class="row" id="image-container"></div>
         </div>
-      </div>
-      
+    </div>
 
-  <script src="scripts.js"></script>
+    <div id="addModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Novo Jogador</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="imageForm">
+                        <div class="form-group">
+                            <label for="title">Nome do Jogador:</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição:</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageUrl">URL da Foto:</label>
+                            <input type="url" class="form-control" id="imageUrl" name="imageUrl" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="imageModalBody">
+                    <img src="" alt="" id="modalImage" class="img-fluid mb-3">
+                    <p><strong>Título:</strong> <span id="modalTitle"></span></p>
+                    <p><strong>Descrição:</strong> <span id="modalDescription"></span></p>
+                    <p><strong>URL da Imagem:</strong> <span id="modalImageUrl"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteButton">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
