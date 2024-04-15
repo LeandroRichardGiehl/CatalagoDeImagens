@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('addButton');
     let currentImageId = null;
 
-    // Função para adicionar a nova imagem à galeria
     function addImageToGallery(image) {
         const imageItem = document.createElement('div');
         imageItem.classList.add('image-item');
@@ -24,18 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
         imageContainer.appendChild(imageItem);
     }
 
-    // Event listener para abrir o modal ao clicar no botão "Adicionar"
     addButton.addEventListener('click', () => {
         $('#addModal').modal('show');
     });
 
-    // Event listener para submeter o formulário do modal
     form.addEventListener('submit', event => {
         event.preventDefault();
         submitFormData();
     });
 
-    // Função para enviar os dados do formulário para o servidor e adicionar a nova imagem à galeria
     function submitFormData() {
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
@@ -54,15 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(newImage)
         })
-        .then(response => response.json())
-        .then(data => {
-            $('#addModal').modal('hide');
-            addImageToGallery(data);
-        })
-        .catch(error => console.error('Erro ao adicionar imagem:', error));
+            .then(response => response.json())
+            .then(data => {
+                $('#addModal').modal('hide');
+                addImageToGallery(data);
+            })
+            .catch(error => console.error('Erro ao adicionar imagem:', error));
     }
 
-    // Event listener para abrir o modal da imagem
     function openImageModal(image) {
         const modalTitle = document.querySelector('#imageModal .modal-title');
         const modalBody = document.querySelector('#imageModal .modal-body');
@@ -91,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#imageModal').modal('show');
     }
 
-    // Função para editar a imagem
     function editImage(image) {
         const editModal = document.getElementById('editModal');
         const editForm = document.getElementById('editImageForm');
@@ -113,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para enviar os dados do formulário de edição para o servidor e atualizar a imagem na galeria
     function submitEditForm(image) {
         const editTitle = document.getElementById('editTitle').value;
         const editDescription = document.getElementById('editDescription').value;
@@ -132,15 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(editedImage)
         })
-        .then(response => response.json())
-        .then(data => {
-            $('#editModal').modal('hide');
-            updateImageInGallery(data);
-        })
-        .catch(error => console.error('Erro ao editar imagem:', error));
+            .then(response => response.json())
+            .then(data => {
+                $('#editModal').modal('hide');
+                updateImageInGallery(data);
+            })
+            .catch(error => console.error('Erro ao editar imagem:', error));
     }
 
-    // Função para excluir a imagem da galeria e do JSON
     function deleteImage(id) {
         fetch(`http://localhost:3000/api/excluir-imagem/${id}`, {
             method: 'DELETE',
@@ -148,18 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => {
-            if (response.ok) {
-                $('#imageModal').modal('hide');
-                removeImageFromGallery(id);
-            } else {
-                throw new Error('Erro ao excluir imagem.');
-            }
-        })
-        .catch(error => console.error('Erro ao excluir imagem:', error.message));
+            .then(response => {
+                if (response.ok) {
+                    $('#imageModal').modal('hide');
+                    removeImageFromGallery(id);
+                } else {
+                    throw new Error('Erro ao excluir imagem.');
+                }
+            })
+            .catch(error => console.error('Erro ao excluir imagem:', error.message));
     }
 
-    // Função para remover a imagem da galeria após exclusão bem-sucedida
     function removeImageFromGallery(id) {
         const imageItem = document.querySelector(`.image-item[data-id="${id}"]`);
         if (imageItem) {
@@ -167,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para atualizar os dados da imagem na galeria após edição
     function updateImageInGallery(image) {
         const imageItem = document.querySelector(`.image-item[data-id="${image.id}"]`);
         if (imageItem) {
@@ -180,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Carregar as imagens do arquivo dados.json ao iniciar a página
     fetch('dados.json')
         .then(response => response.json())
         .then(data => {
