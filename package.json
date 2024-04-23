@@ -4,7 +4,9 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "http-proxy-middleware": "^3.0.0",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "swagger": "^0.7.5",
+    "swagger-ui-express": "^5.0.0"
   },
   "scripts": {
     "start": "nodemon server.js"

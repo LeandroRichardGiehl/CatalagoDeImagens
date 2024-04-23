@@ -2,12 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');    
+const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
+
 const app = express();
 const port = 3000;
 
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors())
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+;
+
 
 const dadosPath = path.join(__dirname, 'dados.json');
 
